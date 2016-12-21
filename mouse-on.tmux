@@ -2,9 +2,9 @@
 
 TMUX_VERSION="$(tmux -V | cut --delimiter=" " --fields=2)"
 
-if [ $(echo "$TMUX_VERSION <= 2.1" | bc) ] ; then
+if [ $(echo "$TMUX_VERSION" |  awk '{ print ($1 >= 2.1) ? "0" : "" }') ] ; then
 	tmux set-option -g mouse on
-elif [ $(echo "$TMUX_VERSION <= 1.9" | bc) ] ; then
+elif [ $(echo "$TMUX_VERSION" |  awk '{ print ($1 >= 1.9) ? "0" : "" }') ] ; then
 	tmux set-option -g mode-mouse on
 	tmux set-option -g mouse-resize-pane on
 	tmux set-option -g mouse-select-pane on
