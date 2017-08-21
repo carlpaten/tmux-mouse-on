@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TMUX_VERSION="$(tmux -V | cut --delimiter=" " --fields=2)"
+TMUX_VERSION="$(tmux -V | grep -oE '[^ ]+$')"
 
 if [ $(echo "$TMUX_VERSION" |  awk '{ print ($1 >= 2.1) ? "0" : "" }') ] ; then
 	tmux set-option -g mouse on
